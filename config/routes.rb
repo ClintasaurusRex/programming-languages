@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :programming_languages
 
-  root "languages#index"  # This sets the root route to the index action of the languages controller
-  resources :languages
-
+  root "programming_languages#index"
+  resources :programming_languages
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
