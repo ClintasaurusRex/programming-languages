@@ -1,13 +1,6 @@
 class ProgrammingLanguagesController < ApplicationController
   before_action :set_programming_language, only: %i[ show edit update destroy ]
 
-  class ProgrammingLanguage < ApplicationRecord
-    validates :title, presence: true, uniqueness: true
-    validates :description, presence: true
-    # validates :link, presence: true, url: true
-  end
-
-
   # GET /programming_languages or /programming_languages.json
   def index
     @programming_languages = ProgrammingLanguage.all
@@ -15,7 +8,6 @@ class ProgrammingLanguagesController < ApplicationController
 
   # GET /programming_languages/1 or /programming_languages/1.json
   def show
-    @programming_language = ProgrammingLanguage.find(params[:id])
   end
 
   # GET /programming_languages/new
@@ -30,15 +22,10 @@ class ProgrammingLanguagesController < ApplicationController
   # POST /programming_languages or /programming_languages.json
   def create
     @programming_language = ProgrammingLanguage.new(programming_language_params)
-
-    respond_to do |format|
-      if @programming_language.save
-        format.html { redirect_to programming_language_url(@programming_language), notice: "Programming language was successfully created." }
-        format.json { render :show, status: :created, location: @programming_language }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @programming_language.errors, status: :unprocessable_entity }
-      end
+    if @programming_language.save
+      redirect_to @programming_language, notice: "Programming language was successfully created."
+    else
+      render :new
     end
   end
 
@@ -58,7 +45,6 @@ class ProgrammingLanguagesController < ApplicationController
   # DELETE /programming_languages/1 or /programming_languages/1.json
   def destroy
     @programming_language.destroy!
-
     respond_to do |format|
       format.html { redirect_to programming_languages_url, notice: "Programming language was successfully destroyed." }
       format.json { head :no_content }

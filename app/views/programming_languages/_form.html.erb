@@ -1,9 +1,9 @@
-<%= form_with(model: programming_language, url: programming_language_path(programming_language)) do |form| %>
-  <% if programming_language.errors.any? %>
+<%= form_with(model: @programming_language, url: programming_languages_path, local: true) do |form| %>
+  <% if @programming_language.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(programming_language.errors.count, "error") %> prohibited this programming_language from being saved:</h2>
+      <h2><%= pluralize(@programming_language.errors.count, "error") %> prohibited this programming_language from being saved:</h2>
       <ul>
-        <% programming_language.errors.each do |error| %>
+        <% @programming_language.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
